@@ -1,0 +1,32 @@
+var express = require('express');
+
+var router = express.Router();
+
+
+var all_users = [];
+for(i = 0; i < 10; i ++) {
+	var name = "name " + i;
+	var value = "value " + 2 * i;
+	all_users.push({name: name, value: value});
+}
+
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  //res.send('respond with a resource');
+  res.set("X-Powered-By", "XYZ00000");
+  res.json( all_users );
+});
+
+router.get('/:id', function(req, res) {
+	var index = parseInt(req.params.id);
+	if(index >= all_users.length) {
+		console.log("bad index:" + req.params.id);
+	} else {
+		console.log("returning object at index " + index);
+		res.json( all_users[ index ]);
+	}
+});
+
+
+module.change_code = 1;
+module.exports = router;
